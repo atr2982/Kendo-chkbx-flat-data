@@ -56,6 +56,7 @@ import { of, Observable } from "rxjs";
 
       kendoTreeViewExpandable
       [(expandedKeys)]="expandedKeys"
+      [expandBy]="'text'"
     >
     </kendo-treeview>
 
@@ -70,7 +71,7 @@ import { of, Observable } from "rxjs";
 })
 export class AppComponent {
   public checkedKeys: any[] = [];
-  public expandedKeys: any[] = ["0"];
+  public expandedKeys: any[] = ["All"];
 
   public enableCheck = true;
   public checkChildren = false;
