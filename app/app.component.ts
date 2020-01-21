@@ -108,14 +108,8 @@ export class AppComponent {
 
   public search(items: any[], term: string): any[] {
     return items.reduce((acc, item) => {
-      if (this.contains(item.category, term)) {
+      if (this.contains(item.text, term)) {
         acc.push(item);
-      } else if (item.children && item.children.length > 0) {
-        const newItems = this.search(item.children, term);
-
-        if (newItems.length > 0) {
-          acc.push({ category: item.category, children: newItems });
-        }
       }
       return acc;
     }, []);
