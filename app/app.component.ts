@@ -15,48 +15,20 @@ import { of, Observable } from "rxjs";
     <fieldset>
       <div *ngIf="checkMode == 'multiple'">
         <label class="k-form-field right">
-          <input
-            type="checkbox"
-            id="enableCheck"
-            class="k-checkbox"
-            [(ngModel)]="enableCheck"
-          />
-          <label class="k-checkbox-label" for="enableCheck"
-            >Enable Checkboxes</label
-          >
+          <input type="checkbox" id="enableCheck" class="k-checkbox" [(ngModel)]="enableCheck"/>
+          <label class="k-checkbox-label" for="enableCheck">Enable Checkboxes</label>
         </label>
         <label class="k-form-field right">
-          <input
-            type="checkbox"
-            id="checkChildren"
-            class="k-checkbox"
-            [(ngModel)]="checkChildren"
-          />
-          <label class="k-checkbox-label" for="checkChildren"
-            >Check all children when parent is checked</label
-          >
+          <input type="checkbox" id="checkChildren" class="k-checkbox" [(ngModel)]="checkChildren"/>
+          <label class="k-checkbox-label" for="checkChildren">Check all children when parent is checked</label>
         </label>
         <label class="k-form-field right">
-          <input
-            type="checkbox"
-            id="checkParents"
-            class="k-checkbox"
-            [(ngModel)]="checkParents"
-          />
-          <label class="k-checkbox-label" for="checkParents"
-            >Check parent when children are all checked</label
-          >
+          <input type="checkbox" id="checkParents" class="k-checkbox" [(ngModel)]="checkParents"/>
+          <label class="k-checkbox-label" for="checkParents">Check parent when children are all checked</label>
         </label>
         <label class="k-form-field right">
-          <input
-            type="checkbox"
-            id="checkOnClick"
-            class="k-checkbox"
-            [(ngModel)]="checkOnClick"
-          />
-          <label class="k-checkbox-label" for="checkOnClick"
-            >Check the node on click</label
-          >
+          <input type="checkbox" id="checkOnClick" class="k-checkbox" [(ngModel)]="checkOnClick"/>
+          <label class="k-checkbox-label" for="checkOnClick">Check the node on click</label>
         </label>
       </div>
     </fieldset>
@@ -72,13 +44,17 @@ import { of, Observable } from "rxjs";
     />
     <kendo-treeview
       [nodes]="parsedData"
-      kendoTreeViewExpandable
-      textField="text"
+
       kendoTreeViewFlatDataBinding
+      textField="text"
       idField="id"
       parentIdField="parentId"
+
       [kendoTreeViewCheckable]="checkableSettings"
       [(checkedKeys)]="checkedKeys"
+      [checkBy]="'text'"
+
+      kendoTreeViewExpandable
       [(expandedKeys)]="expandedKeys"
     >
     </kendo-treeview>
@@ -93,7 +69,7 @@ import { of, Observable } from "rxjs";
   `
 })
 export class AppComponent {
-  public checkedKeys: any[] = ["0_3_4_0", "0_3_4_1", "0_3_4_2"];
+  public checkedKeys: any[] = [];
   public expandedKeys: any[] = ["0"];
 
   public enableCheck = true;
@@ -121,52 +97,6 @@ export class AppComponent {
     { id: 6, text: "WCDMA", parentId: 1 },
     { id: 7, text: "UMTS", parentId: 1 },
     { id: 8, text: "VERIZON", parentId: 1 },
-
-    {
-      category: "All",
-      children: [
-        { category: "CDMA" },
-        { category: "GNSS" },
-        { category: "Common" },
-        {
-          category: "LTE",
-          children: [
-            { category: "Event" },
-            { category: "MAC" },
-            { category: "RLC" },
-            { category: "PDCP" },
-            {
-              category: "RRC",
-              children: [
-                {
-                  category: "0xB0C0 - RRC OTA Packet",
-                  children: [
-                    { category: "kpi 1" },
-                    { category: "kpi 2" },
-                    { category: "kpi 3" },
-                    { category: "kpi 4" },
-                    { category: "kpi 5" },
-                    { category: "kpi 6" },
-                    { category: "kpi 7" },
-                    { category: "kpi 8" }
-                  ]
-                },
-                { category: "0xB0C1 - RRC MIB Msg" },
-                { category: "0xB0C2 - RRC Serving Cell Info" }
-              ]
-            },
-            { category: "NAS" },
-            { category: "LL1" },
-            { category: "ML1" },
-            { category: "Reserved" },
-            { category: "VOLTE" }
-          ]
-        },
-        { category: "WCDMA" },
-        { category: "UMTS" },
-        { category: "VERIZON" }
-      ]
-    }
   ];
 
   public parsedData: any[] = this.data;
