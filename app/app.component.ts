@@ -71,7 +71,7 @@ import { of, Observable } from "rxjs";
 })
 export class AppComponent {
   public checkedKeys: any[] = ['0xB0C0', '0xB0C1', '0xB0C2'];
-  public expandedKeys: any[] = ['All', 'LTE', 'RRC'];
+  public expandedKeys = ['All', 'LTE', 'RRC'];
 
   public enableCheck = true;
   public checkChildren = false;
@@ -90,7 +90,7 @@ export class AppComponent {
   }
 
   public data: any[] = [
-    { id: 1, text: "All" },
+    { id: 1, text: "All", parentId: null },
     { id: 2, text: "CDMA", parentId: 1 },
     { id: 3, text: "GNSS", parentId: 1 },
     { id: 4, text: "Common", parentId: 1 },
@@ -133,22 +133,68 @@ export class AppComponent {
 
   public parsedData: any[] = this.data;
   public searchTerm = "";
+  public idSet = [];
+  public parents = [];
+  public isFilter = false;
 
   public onkeyup(value: string): void {
+    this.idSet = [];
+    this.parents = [];
     this.parsedData = this.search(this.data, value);
-    console.log('parsedData', this.parsedData);
   }
 
   public search(items: any[], term: string): any[] {
-    return items.reduce((acc, item) => {
+    if (term == '') return items;
+
+    let filteredItems = items.reduce((acc, item) => {
       if (this.contains(item.text, term)) {
         acc.push(item);
+        this.idSet.push(item.id);
       }
       return acc;
     }, []);
+
+    let parentItems = this.searchParents(items, filteredItems);
+
+    if (parentItems.length) {
+      filteredItems = filteredItems.concat(parentItems);
+    }
+
+    return filteredItems;
+  }
+
+  public searchParents(items, filters) {
+    for (let i in filters) {
+      if (filters[i].parentId) {
+        for (let j in items) {
+          if (this.notAlreadySet(this.idSet, items[j].id)) {
+            if (items[j].id == filters[i].parentId) {
+              this.parents.push(items[j]);
+              this.idSet.push(items[j].id);
+              this.searchParents(items, this. parents);
+            }
+          }
+        }
+      }
+    }
+
+    return this.parents;
   }
 
   public contains(text: string, term: string): boolean {
-    return text.toLowerCase().indexOf(term.toLowerCase()) >= 0;
+    let hasText = text.toLowerCase().indexOf(term.toLowerCase()) >= 0;
+    return hasText;
+  }
+
+  public notAlreadySet(idSet, id) {
+    let notSet = true;
+
+    if (idSet.length) {
+      for (let i in idSet) {
+        if (idSet[i] == id) notSet = false;
+      }
+    }
+
+    return notSet;
   }
 }
