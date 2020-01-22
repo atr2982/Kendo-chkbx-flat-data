@@ -70,8 +70,8 @@ import { of, Observable } from "rxjs";
   `
 })
 export class AppComponent {
-  public checkedKeys: any[] = [];
-  public expandedKeys: any[] = ["All"];
+  public checkedKeys: any[] = ['0xB0C0', '0xB0C1', '0xB0C2'];
+  public expandedKeys: any[] = ['All', 'LTE', 'RRC'];
 
   public enableCheck = true;
   public checkChildren = false;
@@ -98,6 +98,37 @@ export class AppComponent {
     { id: 6, text: "WCDMA", parentId: 1 },
     { id: 7, text: "UMTS", parentId: 1 },
     { id: 8, text: "VERIZON", parentId: 1 },
+    { id: 9, text: "Event", parentId: 5 },
+    { id: 10, text: "MAC", parentId: 5 },
+    { id: 11, text: "RLC", parentId: 5 },
+    { id: 12, text: "PDCP", parentId: 5 },
+    { id: 13, text: "RRC", parentId: 5 },
+    { id: 14, text: "NAS", parentId: 5 },
+    { id: 15, text: "LL1", parentId: 5 },
+    { id: 16, text: "ML1", parentId: 5 },
+    { id: 17, text: "Reserved", parentId: 5 },
+    { id: 18, text: "VOLTE", parentId: 5 },
+    { id: 19, text: "0xFFF0", parentId: 18 },
+    { id: 20, text: "RTP", parentId: 19 },
+    { id: 21, text: "SIP", parentId: 19 },
+    { id: 22, text: "0xB0C0", parentId: 13 },
+    { id: 23, text: "0xB0C1", parentId: 13 },
+    { id: 24, text: "0xB0C2", parentId: 13 },
+    { id: 25, text: "a1-Threshold", parentId: 22 },
+    { id: 26, text: "a2-Threshold", parentId: 22 },
+    { id: 27, text: "a3-Offset", parentId: 22 },
+    { id: 28, text: "0xB0E1", parentId: 14 },
+    { id: 29, text: "0xB0E2", parentId: 14 },
+    { id: 30, text: "0xB0E3", parentId: 14 },
+    { id: 31, text: "0xB0E4", parentId: 14 },
+    { id: 32, text: "0xB0E5", parentId: 14 },
+    { id: 33, text: "0xB0E6", parentId: 14 },
+    { id: 34, text: "Access Barring Enabled", parentId: 23 },
+    { id: 35, text: "Crs Ports", parentId: 23 },
+    { id: 36, text: "DL Bandwidth", parentId: 23 },
+    { id: 37, text: "Allowed Access", parentId: 24 },
+    { id: 38, text: "Cell Identity", parentId: 24 },
+    { id: 39, text: "DL Bandwidth", parentId: 24 },
   ];
 
   public parsedData: any[] = this.data;
