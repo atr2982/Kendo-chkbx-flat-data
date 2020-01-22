@@ -136,6 +136,7 @@ export class AppComponent {
 
   public onkeyup(value: string): void {
     this.parsedData = this.search(this.data, value);
+    console.log('parsedData', this.parsedData);
   }
 
   public search(items: any[], term: string): any[] {
