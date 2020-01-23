@@ -34,7 +34,7 @@ import { of, Observable } from "rxjs";
     </fieldset>
 
     <hr />
-
+    
     <input
       [(ngModel)]="searchTerm"
       id="filter"
